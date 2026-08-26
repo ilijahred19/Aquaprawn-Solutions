@@ -1,0 +1,96 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Aquaprawn.Site1" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>Aquaprawn</title>
+
+    <link rel="stylesheet" href="StyleSheet1.css" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+
+<body class="subtle-background">
+
+<form id="form1" runat="server">
+
+<header class="brand-header">
+    <div class="brand-title">
+        <span class="brand-aqua">AQUA</span><span class="brand-prawn">PRAWN</span>
+    </div>
+    <div class="brand-sub">SOLUTIONS</div>
+    <div class="brand-tag">YOUR PARTNER IN SUSTAINABLE SHRIMP SUPPLY</div>
+</header>
+
+
+
+<nav class="nav-bar">
+    <div class="nav-left">
+        <a href="default.aspx">Home</a>
+        <a href="products.aspx">Products</a>
+    </div>
+
+    <div class="nav-right">
+
+        <!-- Guest Navigation -->
+
+        <!-- Logged-In Navigation -->
+        <asp:PlaceHolder ID="phGuest" runat="server">
+            <a href="Login.aspx">Login</a>
+            <a href="Join.aspx" class="reg-link">Register</a>
+        </asp:PlaceHolder>
+
+<asp:PlaceHolder ID="phUser" runat="server" Visible="false">
+    <div class="account-dropdown" id="userMenu">
+        <span class="nav-user">
+            🦐 Welcome, <%= Session["CUS_NAME"] %> ▾
+        </span>
+
+        <div class="dropdown-menu">
+            <a href="MyAccount.aspx">My Account</a>
+            <a href="myorders.aspx">My Orders</a>
+            <a href="Logoff.aspx">Log Off</a>
+        </div>
+    </div>
+</asp:PlaceHolder>
+
+
+
+    </div>
+</nav>
+
+
+
+    <main class="content-wrapper">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+    </main>
+
+    <footer class="site-footer">
+        &copy; <%: DateTime.Now.Year %> Aquaprawn Distribution
+    </footer>
+
+</form>
+
+    <script>
+document.addEventListener("click", function (e) {
+
+    const menu = document.querySelector(".dropdown-menu");
+    const trigger = document.querySelector(".account-dropdown");
+
+    if (!menu || !trigger) return;
+
+    // Toggle if user clicked the button
+    if (trigger.contains(e.target)) {
+        menu.classList.toggle("active");
+        return;
+    }
+
+    // Otherwise close if clicking anywhere else
+    menu.classList.remove("active");
+});
+    </script>
+
+
+</body>
+</html>
