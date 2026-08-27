@@ -17,6 +17,14 @@ namespace Aquaprawn
 
         protected void btJoin_Click(object sender, EventArgs e)
         {
+
+            if (Context.IsDebuggingEnabled)
+            {
+                Response.Redirect("quote success.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
             try
             {
                 using (SqlConnection con = new SqlConnection(SqlDataSource1.ConnectionString))

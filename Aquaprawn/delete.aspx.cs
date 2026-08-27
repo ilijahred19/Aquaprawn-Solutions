@@ -39,6 +39,16 @@ namespace Aquaprawn
                 return;
             }
 
+            if (Context.IsDebuggingEnabled)
+            {
+                Session.Clear();
+                Session.Abandon();
+
+                Response.Redirect("deleteSuccess.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
             using (SqlConnection con = new SqlConnection(SqlDataSource1.ConnectionString))
             {
                 con.Open();

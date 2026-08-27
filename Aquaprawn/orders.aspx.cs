@@ -39,6 +39,35 @@ namespace Aquaprawn
         private void LoadInventory()
         {
             List<InventoryItem> items = new List<InventoryItem>();
+
+            #if DEBUG
+                items.Add(new InventoryItem
+                {
+                    InvId = 1,
+                    Description = "21/25 Count - Premium Grade",
+                    SalePrice = 18.99m
+                });
+
+                items.Add(new InventoryItem
+                {
+                    InvId = 2,
+                    Description = "16/20 Count - Chef Select",
+                    SalePrice = 21.49m
+                });
+
+                items.Add(new InventoryItem
+                {
+                    InvId = 3,
+                    Description = "U/15 Count - Signature Large",
+                    SalePrice = 24.99m
+                });
+
+                Session["CurrentInventory"] = items;
+                rptProducts.DataSource = items;
+                rptProducts.DataBind();
+                return;
+            #endif
+
             string connectionString = SqlDataSource1.ConnectionString;
 
             string query = @"
@@ -100,6 +129,15 @@ namespace Aquaprawn
             }
 
             if (cart.Count == 0) return;
+
+#if DEBUG
+            Session["DemoOrderTotal"] = totalPrice;
+            Session["DemoOrderDate"] = DateTime.Now;
+
+            Response.Redirect("order success.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
+            return;
+#endif
 
             string connectionString = SqlDataSource1.ConnectionString;
             int customerId = Convert.ToInt32(Session["CUS_ID"]);
