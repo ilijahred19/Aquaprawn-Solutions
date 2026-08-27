@@ -18,7 +18,7 @@
 
 AquaPrawn Solutions was developed by a five-person academic team as an information-systems project for a fictional Midwest-based B2B shrimp supplier. The application translates a commercial procurement workflow into a working web experience: prospective buyers can browse products or request a quote, while registered customers can manage their accounts, place orders, and review purchase details.
 
-This repository is a personal portfolio copy. The `portfolio-demo` branch includes a debug-only presentation mode that recreates authenticated UI states with local demo data when the original course database is unavailable. The original SQL-backed application paths remain in the codebase.
+This repository is a personal portfolio copy. This portfolio copy includes a debug-only presentation mode that recreates authenticated UI states with local demo data when the original course database is unavailable. The original SQL-backed application paths remain in the codebase.
 
 | Project detail | Description |
 | --- | --- |
@@ -148,7 +148,7 @@ AquaPrawn-Solutions/
 
 ### Setup
 
-1. Clone this repository and check out the `portfolio-demo` branch.
+1. Clone this repository.
 2. Open `Aquaprawn.sln` in Visual Studio.
 3. Restore the packages listed in `packages.config`.
 4. Build the solution.
