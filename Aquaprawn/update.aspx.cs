@@ -22,7 +22,15 @@ namespace Aquaprawn
             // Only load data first time, not on button clicks
             if (!IsPostBack)
             {
+            #if DEBUG
+                txtEmail.Text = Session["email"].ToString();
+                txtFname.Text = "Ilijah";
+                txtLname.Text = "Red";
+                txtOrg.Text = "Aquaprawn Solutions";
+                txtPhone.Text = "(555) 014-2025";
+            #else
                 LoadUserData();
+            #endif
             }
         }
 
@@ -62,6 +70,16 @@ namespace Aquaprawn
                 lblStatus.Text = "❗ Passwords do not match.";
                 return;
             }
+
+            #if DEBUG
+                if (!string.IsNullOrWhiteSpace(txtFname.Text))
+                {
+                    Session["CUS_NAME"] = txtFname.Text.Trim();
+                }
+
+                successModal.Visible = true;
+                return;
+            #endif
 
             string email = Session["email"].ToString();
 

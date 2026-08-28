@@ -35,10 +35,29 @@ namespace Aquaprawn
                 return;
             }
 
+            if (Context.IsDebuggingEnabled)
+            {
+                string firstName = txtFname.Text.Trim();
 
-            
+                Session["CUS_ID"] = "1";
+                Session["CUS_NAME"] =
+                    string.IsNullOrWhiteSpace(firstName) ? "New Partner" : firstName;
+
+                Session["email"] = txtEmail.Text.Trim();
+                Session["CUS_ORG"] = txtOrganization.Text.Trim();
+                Session["CUS_PHONE"] = txtPhone.Text.Trim();
+                Session["CUS_START"] = DateTime.Now.ToString();
+
+                Session["NewUser"] = "true";
+                Session["ShowWelcomeToast"] = "true";
+
+                Response.Redirect("default.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
             // 2) Use SqlDataSource to Insert
-           
+
             SqlDataSource1.InsertParameters["CUS_ORG"].DefaultValue = txtOrganization.Text;
             SqlDataSource1.InsertParameters["CUS_FNAME"].DefaultValue = txtFname.Text;
             SqlDataSource1.InsertParameters["CUS_LNAME"].DefaultValue = txtLname.Text;

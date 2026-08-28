@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Data;
+using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -17,10 +18,41 @@ namespace Aquaprawn
                     return;
                 }
 
+#if DEBUG
+                LoadDemoOrders();
+#else
                 LoadCustomerOrders();
+#endif
             }
         }
 
+        private void LoadDemoOrders()
+        {
+            DataTable orders = new DataTable();
+
+            orders.Columns.Add("ORDER_ID", typeof(int));
+            orders.Columns.Add("ORD_Date", typeof(DateTime));
+            orders.Columns.Add("ORD_PRICE", typeof(decimal));
+            orders.Columns.Add("ORD_ARRIVAL_DATE", typeof(DateTime));
+
+            orders.Rows.Add(
+                1048,
+                DateTime.Today.AddDays(-3),
+                87.96m,
+                DateTime.Today.AddDays(2)
+            );
+
+            orders.Rows.Add(
+                1047,
+                DateTime.Today.AddDays(-30),
+                137.94m,
+                DateTime.Today.AddDays(-28)
+            );
+
+            gvMyOrders.DataSourceID = string.Empty;
+            gvMyOrders.DataSource = orders;
+            gvMyOrders.DataBind();
+        }
         private void LoadCustomerOrders()
         {
             object customerId = Session["CUS_ID"];

@@ -17,6 +17,17 @@ namespace Aquaprawn
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+        #if DEBUG
+            Session["CUS_ID"] = "1";
+            Session["CUS_NAME"] = "Ilijah";
+            Session["email"] = "ilijah.demo@aquaprawn.local";
+            Session["LoginSuccess"] = "true";
+
+            Response.Redirect("default.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
+            return;
+        #endif
+
             SqlDataSource1.SelectParameters["CUS_EMAIL"].DefaultValue = txtEmail.Text.Trim();
 
             DataView dv = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);

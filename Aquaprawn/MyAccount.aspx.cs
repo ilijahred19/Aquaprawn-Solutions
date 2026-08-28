@@ -20,6 +20,16 @@ namespace Aquaprawn
                     return;
                 }
 
+                #if DEBUG
+                    lblName.Text = "Ilijah";
+                    lblEmail.Text = Session["email"].ToString();
+                    lblFullName.Text = "Ilijah Red";
+                    lblOrg.Text = "Aquaprawn Solutions";
+                    lblPhone.Text = "(555) 014-2025";
+                    lblDate.Text = "December 08, 2025";
+                    return;
+                #endif
+
                 string cs = System.Configuration.ConfigurationManager
                             .ConnectionStrings["AquaPrawnConnectionString"].ConnectionString;
 
